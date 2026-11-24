@@ -162,7 +162,7 @@ grado xs = lengthFl (xs) -1
 sumaPol :: [Float] -> [Float] -> [Float]
 sumaPol xs ys = reverse (sumarInv (reverse xs) (reverse ys)) --suma los dos vectores desde el ultimo asi no tiene problema al alinear
   where
-    sumarInv [] []         = []
+    sumarInv [] []         = [] --Nota ya recive el valor dado vuelta para evaluar desde el ultimo al primero ambos
     sumarInv (a:as) []     = a : sumarInv as []
     sumarInv [] (b:bs)     = b : sumarInv [] bs
     sumarInv (a:as) (b:bs) = (a + b) : sumarInv as bs
