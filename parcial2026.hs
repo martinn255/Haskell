@@ -1,4 +1,4 @@
---Ejercicio tema B
+----------------Ejercicio tema B----------
 --tamanio
 tam::[a]->Double
 tam [] = 0
@@ -19,7 +19,7 @@ newton x y e
  |(abs (evaluar x y)) < e = y
  |otherwise = newton x (y - (evaluar x y)/(evaluar (derivar x) y)) e
 
---Ejercicio tema A
+---------------Ejercicio tema A -------------------
 getPos::[(Double,Double)]->Int->Double
 getPos [] _ = 0
 getPos ((x,_):_) 0 = x
@@ -38,3 +38,23 @@ interpolar x y = interpolarAux x x y
 interpolarAux::[(Double,Double)]->[(Double,Double)]->Double->Double
 interpolarAux _ [] _ = 0
 interpolarAux original ((x,y):xs) z = y * (baseLagrange original ((length original) - (length ((x,y):xs))) z) + interpolarAux original xs z
+
+-------De nuevo realizo 2026 B----
+evaluarN :: [Double] -> Double -> Double 
+evaluarN [] _ = 0
+evaluarN (x:xs) n = x * (n**lengthD xs ) + evaluar xs n
+
+lengthD :: [Double] -> Double
+lengthD [] = 0
+lengthD (x:xs) = (1 + lengthD xs)
+
+derivarN :: [Double] -> [Double]
+derivarN [] = []
+derivarN (x:xs) =  x * lengthD (xs) : derivar xs 
+     
+newtonR :: [Double] -> Double -> Double -> Double
+newtonR xs y e 
+    | abs (evaluarN xs y) < e = y
+    | otherwise = newtonR xs (y - (evaluarN (xs) y) / (evaluarN (derivar (xs)) y)) e 
+
+ 

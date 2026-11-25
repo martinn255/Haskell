@@ -72,28 +72,34 @@ cTranposAux x n i j
  |i<=(length x - 1) = devPos x i : cTranposAux x n (i+n) j
 
 {-
-Tema A v3 Hecha en 2025
+Tema A v3 Hecha en 2025 --son versiones de como hacerlo esta es la version 3
 -}
 cTranpos2::String->Int->String
-cTranpos2 s n = m2S (transpose (s2M (completarc s n) n))
+cTranpos2 s n = m2S (transpose (s2M (completarc s n) n)) -- el transpose me devuelve ["Heeel","alsn","sl i","k ga"]
 
 completarc::String->Int->String
 completarc s n = s ++ replicate tam ' '
- where tam = n*(div (length s) n +1) - length s
+ where 
+    tam = n*(div (length s) n +1) - length s
 
+---esto me da la matriz con las partes de ["Hask","ell ","es g","enia","l"] pero no los ultimos espacios
 s2M::String->Int->[String]
 s2M [] _ = []
 s2M s n = (take n s) : s2M (drop n s) n
 
 --transpose esta en la libreria Data.List
-
+--Esta parte me lo vuleve a armar y me lo deja como un astring de nuevo 
 m2S::[String]->String
 m2S [] = []
 m2S (x:xs) = x ++ m2S xs
 
 {-
 Tema B ->
-La criptografía es el conjunto de estrategias que permiten transformar la información para protegerla de accesos no autorizados. Uno de los métodos más conocidos es el cifrado de Vigenere, que utiliza una palabra clave para modificar el texto original de manera que se desplaza cada letra según la letra correspondiente de la clave. Por ejemplo, si usamos la palabra clave "clave" para cifrar el mensaje "HOLA MUNDO" el resultado del cifrado sería: "JZLV QWYDJ". Para ello se asignan valores numéricos (A=0, B=1, ..., Z=25) y se aplican los desplazamientos:
+La criptografía es el conjunto de estrategias que permiten transformar la información para protegerla de accesos no autorizados.
+-- Uno de los métodos más conocidos es el cifrado de Vigenere, que utiliza una palabra clave para modificar el texto original 
+--de manera que se desplaza cada letra según la letra correspondiente de la clave. Por ejemplo, si usamos la palabra clave "clave" 
+--para cifrar el mensaje "HOLA MUNDO" el resultado del cifrado sería: "JZLV QWYDJ". Para ello se asignan valores
+-- numéricos (A=0, B=1, ..., Z=25) y se aplican los desplazamientos:
     • H (7) + c (2) = J (9)
     • O(14) + l (11) = Z (25)
     • L (11) + a (0) = L (11)

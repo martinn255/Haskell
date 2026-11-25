@@ -121,9 +121,42 @@ finales n (x:xs)
         len = fromIntegral(length xs) 
 
 ---------Ejercicio 4------------
+--a)
+--Suma de los cuadrados de los primeros n números, es decir 1^2 + 2^2 + 3^2 +
+sumaCuadrados :: Integer -> Integer 
+sumaCuadrados n 
+    | n <= 0 = 0    --Esto evita que n sea negativo tener muy en nuenta para la recu infinita 
+    |otherwise =  n^2 + sumaCuadrados (n-1)
+
+
 --b)
 --Replica 
+--Es la lista formada por n copias del elemento. Por Ej, replica 3 True == [True, True, True]
 replica :: Int -> a -> [a]
 replica n x 
     | n <= 0    = []
     | otherwise =  x : replica (n-1) x
+
+--c)
+--Pares [a] -> [b] -[(a,b)]
+
+pares ::  [a] -> [b] -> [(a,b)]
+pares [] _ = []
+pares _ [] = []
+pares (x:xs) (y:ys) = (x,y) : pares xs ys
+
+----------Ejercicio 5 -------------
+--a) 
+--Resto por resta recursiva 
+{-
+resto 11 3:
+11 >= 3  resto 8 3
+8 >= 3  resto 5 3
+5 >= 3  resto 2 3
+2 < 3  devuelve 2.
+-}
+resto :: Integer -> Integer -> Integer
+resto _ 0 = error "No es divisible por cero"
+resto a b 
+    | a < b = a 
+    | otherwise = resto (a-b) b 
